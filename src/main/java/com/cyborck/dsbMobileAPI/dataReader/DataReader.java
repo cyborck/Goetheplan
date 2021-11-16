@@ -80,7 +80,7 @@ public class DataReader {
     }
 
     private static Map<String, String> getTimeTableLinks ( String username, String password ) {
-        Map<String, String> timeTables = new HashMap<>();
+        Map<String, String> timeTables = new TreeMap<>();
 
         DSBMobile dsbMobile = new DSBMobile( username, password );
 
