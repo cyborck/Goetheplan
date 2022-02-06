@@ -19,6 +19,11 @@ public class DataReader {
     public static TimeTables getTimeTables ( String username, String password ) throws IOException {
         Map<String, String> timeTableLinks = getTimeTableLinks( username, password );
 
+        if ( timeTableLinks == null )
+            // error occurred (e.g. login failed)
+            // return empty timetables object with status false
+            return new TimeTables();
+
         //today
         List<String> todayUrls = new ArrayList<>();
         for ( Map.Entry<String, String> e: timeTableLinks.entrySet() )
@@ -87,14 +92,18 @@ public class DataReader {
         int todayCount = 0;
         int tomorrowCount = 0;
 
-        for ( DSBMobile.TimeTable timeTable: dsbMobile.getTimeTables() ) {
-            String groupName = timeTable.getGroupName();
-            if ( groupName.contains( "heute" ) )
-                groupName = "today " + ++todayCount;
-            else if ( groupName.contains( "morgen" ) )
-                groupName = "tomorrow " + ++tomorrowCount;
-            String url = timeTable.getDetail();
-            timeTables.put( groupName, url );
+        try {
+            for ( DSBMobile.TimeTable timeTable: dsbMobile.getTimeTables() ) {
+                String groupName = timeTable.getGroupName();
+                if ( groupName.contains( "heute" ) )
+                    groupName = "today " + ++todayCount;
+                else if ( groupName.contains( "morgen" ) )
+                    groupName = "tomorrow " + ++tomorrowCount;
+                String url = timeTable.getDetail();
+                timeTables.put( groupName, url );
+            }
+        } catch ( RuntimeException e ) {
+            return null;
         }
 
         return timeTables;
