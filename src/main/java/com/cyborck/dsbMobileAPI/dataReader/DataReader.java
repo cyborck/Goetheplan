@@ -77,6 +77,11 @@ public class DataReader {
                     continue;
                 }
 
+                if ( classes.isEmpty() ) {
+                    if ( "Team".equals( subject ) ) classes = "Team";
+                    else classes = informationList.get( informationList.size() - 1 ).getClasses();
+                }
+
                 informationList.add( new Information( classes, lessons, absent, replacement, subject, newRoom, type, comments ) );
             }
         }
