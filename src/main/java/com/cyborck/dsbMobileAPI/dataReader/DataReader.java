@@ -79,7 +79,7 @@ public class DataReader {
 
                 if ( classes.isEmpty() ) {
                     if ( "Team".equals( subject ) ) classes = "Team";
-                    else classes = informationList.get( informationList.size() - 1 ).getClasses();
+                    else classes = "other";
                 }
 
                 informationList.add( new Information( classes, lessons, absent, replacement, subject, newRoom, type, comments ) );

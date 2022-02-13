@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.cyborck</groupId>
-	<artifactId>DSBmobileAPI_j-1.8</artifactId>
+	<artifactId>DSBmobileAPI</artifactId>
 	<version>1</version>
 	<name>DSBmobileAPI</name>
 	<description>API für DSBmobile</description>
